@@ -5,12 +5,19 @@
         <maven>3.0.0</maven>
     </prerequisites>
 
-    <groupId>io.dropwizard</groupId>
-    <artifactId>dropwizard-example</artifactId>
-    <version>0.7.0</version>
-    <name>Dropwizard Example Application</name>
+    <groupId>com.alexroussos</groupId>
+    <artifactId>saponify</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <name>Saponify Soap Calculator</name>
+
+    <scm>
+        <url>https://github.com/alexroussos/Mosaic</url>
+        <connection>scm:git:git@github.com:alexroussos/saponify</connection>
+        <developerConnection>scm:git:git@github.com:alexroussos/saponify</developerConnection>
+    </scm>
 
     <properties>
+        <dropwizard.version>0.7.0</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -27,42 +34,42 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-auth</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-assets</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-spdy</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-hibernate</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-migrations</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-views-freemarker</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-views-mustache</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>postgresql</groupId>
@@ -83,7 +90,7 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-testing</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

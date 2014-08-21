@@ -23,7 +23,7 @@ public class SaponifyDatabaseConfiguration implements DatabaseConfiguration {
         LOGGER.info("Creating DB for " + databaseUrl);
         if (databaseUrl == null) {
             throw new IllegalArgumentException("The DATABASE_URL environment variable must be set before running the app " +
-                    "alexroussos: DATABASE_URL=\"postgres://username:password@host:5432/dbname\"");
+                    "example: DATABASE_URL=\"postgres://username:password@host:5432/dbname\"");
         }
         DatabaseConfiguration databaseConfiguration = null;
         try {

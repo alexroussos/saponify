@@ -23,7 +23,6 @@ public class PeopleResource {
     @POST
     @UnitOfWork
     public Person createPerson(Person person) {
-        person.setId(UUID.randomUUID().toString());
         return peopleDAO.create(person);
     }
 

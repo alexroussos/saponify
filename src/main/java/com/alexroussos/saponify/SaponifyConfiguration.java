@@ -51,7 +51,7 @@ public class SaponifyConfiguration extends Configuration {
     }
 
     /**
-     * This gets called with the values from the Dropwizard alexroussos.xmp, but we want to override it with the values
+     * This gets called with the values from the Dropwizard saponify.yml, but we want to override it with the values
      * from the Heroku DATABASE_URL environment variable.
      */
     @JsonProperty("database")

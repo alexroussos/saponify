@@ -16,9 +16,9 @@ import javax.persistence.*;
 })
 public class Person {
     @Id
-  //  @SequenceGenerator(name = "uuid")
-    //@GeneratedValue(generator = "uuid")
-    private String id;
+    @SequenceGenerator(name = "personSeq", sequenceName="person_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "personSeq")
+    private long id;
 
     @Column(name = "fullName", nullable = false)
     private String fullName;
@@ -26,11 +26,11 @@ public class Person {
     @Column(name = "jobTitle", nullable = false)
     private String jobTitle;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -23,10 +23,14 @@ Run locally:
 Test post locally:
 
     curl -H "Content-Type: application/json" -X POST -d '{"fullName":"billy b","jobTitle":"engineer"}' http://localhost:5000/people
+    
+Connect to locat db:
+
+    psql -h localhost -p 5432 -U alex Saponify
   
 Connect to remote db:
-    
-  heroku pg:psql
+
+    heroku pg:psql
     
 Run db migration:
 

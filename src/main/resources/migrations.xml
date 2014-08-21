@@ -6,17 +6,28 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="7" author="alexr">
-        <comment>make people table and column names start lowercase</comment>
-        <createSequence sequenceName="person_id_seq"/>
-        <createTable tableName="people">
+    <changeSet id="8" author="alexr">
+        <comment>add recipe and ingredient tables</comment>
+        <createSequence sequenceName="recipe_id_seq"/>
+        <createTable tableName="recipe">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="fullname" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="jobtitle" type="varchar(255)"/>
+        </createTable>
+        <createSequence sequenceName="ingredient_id_seq"/>
+        <createTable tableName="ingredient">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sapnaoh" type="real">
+                <constraints nullable="false" />
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

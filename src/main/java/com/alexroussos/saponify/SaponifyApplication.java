@@ -1,9 +1,11 @@
 package com.alexroussos.saponify;
 
 import com.alexroussos.saponify.cli.RenderCommand;
-import com.alexroussos.saponify.core.Person;
+import com.alexroussos.saponify.core.Ingredient;
+import com.alexroussos.saponify.core.Recipe;
 import com.alexroussos.saponify.core.Template;
-import com.alexroussos.saponify.db.PersonDAO;
+import com.alexroussos.saponify.db.IngredientDao;
+import com.alexroussos.saponify.db.RecipeDao;
 import com.alexroussos.saponify.health.TemplateHealthCheck;
 import com.alexroussos.saponify.resources.*;
 import io.dropwizard.Application;
@@ -24,8 +26,16 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
         new SaponifyApplication().run(args);
     }
 
-    private final HibernateBundle<SaponifyConfiguration> hibernateBundle =
-            new HibernateBundle<SaponifyConfiguration>(Person.class) {
+    private final HibernateBundle<SaponifyConfiguration> recipeBundle =
+            new HibernateBundle<SaponifyConfiguration>(Recipe.class) {
+                @Override
+                public DataSourceFactory getDataSourceFactory(SaponifyConfiguration configuration) {
+                    return configuration.getDataSourceFactory();
+                }
+            };
+
+    private final HibernateBundle<SaponifyConfiguration> ingredientBundle =
+            new HibernateBundle<SaponifyConfiguration>(Ingredient.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(SaponifyConfiguration configuration) {
                     return configuration.getDataSourceFactory();
@@ -48,7 +58,8 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
                 return configuration.getDataSourceFactory();
             }
         });
-        bootstrap.addBundle(hibernateBundle);
+        bootstrap.addBundle(recipeBundle);
+        bootstrap.addBundle(ingredientBundle);
         bootstrap.addBundle(new ViewBundle());
     }
 
@@ -56,14 +67,14 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
     public void run(SaponifyConfiguration configuration,
                     Environment environment) throws ClassNotFoundException {
         LOGGER.info("Starting the HelloWorld App");
-        final PersonDAO dao = new PersonDAO(hibernateBundle.getSessionFactory());
+        final RecipeDao recipeDao = new RecipeDao(recipeBundle.getSessionFactory());
+        final IngredientDao ingredientDao = new IngredientDao(ingredientBundle.getSessionFactory());
         final Template template = configuration.buildTemplate();
 
         environment.healthChecks().register("template", new TemplateHealthCheck(template));
-        environment.jersey().register(new HelloWorldResource(template));
         environment.jersey().register(new ViewResource());
         environment.jersey().register(new ProtectedResource());
-        environment.jersey().register(new PeopleResource(dao));
-        environment.jersey().register(new PersonResource(dao));
+        environment.jersey().register(new RecipeResource(recipeDao));
+        environment.jersey().register(new IngredientResource(ingredientDao));
     }
 }

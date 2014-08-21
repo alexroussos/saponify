@@ -22,7 +22,7 @@ Run locally:
     
 Test post locally:
 
-    curl -H "Content-Type: application/json" -X POST -d '{"fullName":"billy b","jobTitle":"engineer"}' http://localhost:5000/people
+    curl -H "Content-Type: application/json" -X POST -d '{"name": "coconut", "sapNaoh": 0.183}' http://localhost:5000/ingredient
     
 Connect to locat db:
 

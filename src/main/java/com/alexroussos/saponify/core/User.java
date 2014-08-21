@@ -1,4 +1,4 @@
-package com.example.helloworld.core;
+package com.alexroussos.saponify.core;
 
 public class User {
     private final String name;

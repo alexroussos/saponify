@@ -1,10 +1,8 @@
-package com.example.helloworld;
+package com.alexroussos.saponify;
 
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.DatabaseConfiguration;
-import io.dropwizard.hibernate.HibernateBundle;
-import io.dropwizard.setup.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,19 +11,19 @@ import java.net.URISyntaxException;
 
 /**
  * This class is basically a hack to use the Heroku DATABASE_URL instead of the database configuration in the
- * Dropwizard example.yml.
+ * Dropwizard saponify.yml.
  *
  * TODO Make this not so ugly
  */
-public class ExampleDatabaseConfiguration implements DatabaseConfiguration {
-    final static Logger LOGGER = LoggerFactory.getLogger(ExampleDatabaseConfiguration.class);
+public class SaponifyDatabaseConfiguration implements DatabaseConfiguration {
+    final static Logger LOGGER = LoggerFactory.getLogger(SaponifyDatabaseConfiguration.class);
     private static DatabaseConfiguration databaseConfiguration;
 
     public static DatabaseConfiguration create(String databaseUrl) {
         LOGGER.info("Creating DB for " + databaseUrl);
         if (databaseUrl == null) {
             throw new IllegalArgumentException("The DATABASE_URL environment variable must be set before running the app " +
-                    "example: DATABASE_URL=\"postgres://username:password@host:5432/dbname\"");
+                    "alexroussos: DATABASE_URL=\"postgres://username:password@host:5432/dbname\"");
         }
         DatabaseConfiguration databaseConfiguration = null;
         try {

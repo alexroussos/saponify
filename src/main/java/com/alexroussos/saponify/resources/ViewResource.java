@@ -1,4 +1,4 @@
-package com.example.helloworld.resources;
+package com.alexroussos.saponify.resources;
 
 import com.google.common.base.Charsets;
 import io.dropwizard.views.View;

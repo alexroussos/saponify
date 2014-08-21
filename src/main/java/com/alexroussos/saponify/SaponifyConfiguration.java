@@ -1,6 +1,6 @@
-package com.example.helloworld;
+package com.alexroussos.saponify;
 
-import com.example.helloworld.core.Template;
+import com.alexroussos.saponify.core.Template;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
@@ -14,8 +14,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Slf4j
-public class HelloWorldConfiguration extends Configuration {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldConfiguration.class);
+public class SaponifyConfiguration extends Configuration {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SaponifyConfiguration.class);
     @NotEmpty
     private String template;
 
@@ -51,13 +51,13 @@ public class HelloWorldConfiguration extends Configuration {
     }
 
     /**
-     * This gets called with the values from the Dropwizard example.xmp, but we want to override it with the values
+     * This gets called with the values from the Dropwizard alexroussos.xmp, but we want to override it with the values
      * from the Heroku DATABASE_URL environment variable.
      */
     @JsonProperty("database")
     public DataSourceFactory getDataSourceFactory() {
         LOGGER.info("Dropwizard dummy DB URL (will be overridden)=" + database.getUrl());
-        DatabaseConfiguration databaseConfiguration = ExampleDatabaseConfiguration.create(System.getenv("DATABASE_URL"));
+        DatabaseConfiguration databaseConfiguration = SaponifyDatabaseConfiguration.create(System.getenv("DATABASE_URL"));
         database = databaseConfiguration.getDataSourceFactory(null);
         LOGGER.info("Heroku DB URL=" + database.getUrl());
         return database;

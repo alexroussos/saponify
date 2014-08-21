@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/saponify-0.1.0-SNAPSHOT.jar db migrate example.yml && java $JAVA_OPTS -Ddw.server.connector.port=$PORT -jar target/saponify-0.1.0-SNAPSHOT.jar server example.yml
+web: java $JAVA_OPTS -jar target/saponify-0.1.0-SNAPSHOT.jar db migrate saponify.yml && java $JAVA_OPTS -Ddw.server.connector.port=$PORT -jar target/saponify-0.1.0-SNAPSHOT.jar server saponify.yml

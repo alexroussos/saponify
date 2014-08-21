@@ -1,8 +1,8 @@
-package com.example.helloworld.resources;
+package com.alexroussos.saponify.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import com.example.helloworld.core.Saying;
-import com.example.helloworld.core.Template;
+import com.alexroussos.saponify.core.Saying;
+import com.alexroussos.saponify.core.Template;
 import com.google.common.base.Optional;
 import io.dropwizard.jersey.caching.CacheControl;
 import org.slf4j.Logger;

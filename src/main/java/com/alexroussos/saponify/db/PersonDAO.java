@@ -1,6 +1,6 @@
-package com.example.helloworld.db;
+package com.alexroussos.saponify.db;
 
-import com.example.helloworld.core.Person;
+import com.alexroussos.saponify.core.Person;
 import com.google.common.base.Optional;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
@@ -21,6 +21,6 @@ public class PersonDAO extends AbstractDAO<Person> {
     }
 
     public List<Person> findAll() {
-        return list(namedQuery("com.example.helloworld.core.Person.findAll"));
+        return list(namedQuery("com.alexroussos.saponify.core.Person.findAll"));
     }
 }

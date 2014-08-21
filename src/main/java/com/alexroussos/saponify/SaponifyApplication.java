@@ -1,15 +1,13 @@
-package com.example.helloworld;
+package com.alexroussos.saponify;
 
-import com.example.helloworld.auth.ExampleAuthenticator;
-import com.example.helloworld.cli.RenderCommand;
-import com.example.helloworld.core.Person;
-import com.example.helloworld.core.Template;
-import com.example.helloworld.db.PersonDAO;
-import com.example.helloworld.health.TemplateHealthCheck;
-import com.example.helloworld.resources.*;
+import com.alexroussos.saponify.cli.RenderCommand;
+import com.alexroussos.saponify.core.Person;
+import com.alexroussos.saponify.core.Template;
+import com.alexroussos.saponify.db.PersonDAO;
+import com.alexroussos.saponify.health.TemplateHealthCheck;
+import com.alexroussos.saponify.resources.*;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
-import io.dropwizard.auth.basic.BasicAuthProvider;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
@@ -19,17 +17,17 @@ import io.dropwizard.views.ViewBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldConfiguration.class);
+public class SaponifyApplication extends Application<SaponifyConfiguration> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SaponifyConfiguration.class);
 
     public static void main(String[] args) throws Exception {
-        new HelloWorldApplication().run(args);
+        new SaponifyApplication().run(args);
     }
 
-    private final HibernateBundle<HelloWorldConfiguration> hibernateBundle =
-            new HibernateBundle<HelloWorldConfiguration>(Person.class) {
+    private final HibernateBundle<SaponifyConfiguration> hibernateBundle =
+            new HibernateBundle<SaponifyConfiguration>(Person.class) {
                 @Override
-                public DataSourceFactory getDataSourceFactory(HelloWorldConfiguration configuration) {
+                public DataSourceFactory getDataSourceFactory(SaponifyConfiguration configuration) {
                     return configuration.getDataSourceFactory();
                 }
             };
@@ -40,13 +38,13 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     }
 
     @Override
-    public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
+    public void initialize(Bootstrap<SaponifyConfiguration> bootstrap) {
         LOGGER.info("Initializing configuration");
         bootstrap.addCommand(new RenderCommand());
         bootstrap.addBundle(new AssetsBundle());
-        bootstrap.addBundle(new MigrationsBundle<HelloWorldConfiguration>() {
+        bootstrap.addBundle(new MigrationsBundle<SaponifyConfiguration>() {
             @Override
-            public DataSourceFactory getDataSourceFactory(HelloWorldConfiguration configuration) {
+            public DataSourceFactory getDataSourceFactory(SaponifyConfiguration configuration) {
                 return configuration.getDataSourceFactory();
             }
         });
@@ -55,16 +53,13 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     }
 
     @Override
-    public void run(HelloWorldConfiguration configuration,
+    public void run(SaponifyConfiguration configuration,
                     Environment environment) throws ClassNotFoundException {
         LOGGER.info("Starting the HelloWorld App");
         final PersonDAO dao = new PersonDAO(hibernateBundle.getSessionFactory());
         final Template template = configuration.buildTemplate();
 
         environment.healthChecks().register("template", new TemplateHealthCheck(template));
-
-        environment.jersey().register(new BasicAuthProvider<>(new ExampleAuthenticator(),
-                                                              "SUPER SECRET STUFF"));
         environment.jersey().register(new HelloWorldResource(template));
         environment.jersey().register(new ViewResource());
         environment.jersey().register(new ProtectedResource());

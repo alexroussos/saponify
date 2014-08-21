@@ -1,8 +1,8 @@
-package com.example.helloworld.resources;
+package com.alexroussos.saponify.resources;
 
-import com.example.helloworld.core.Person;
-import com.example.helloworld.db.PersonDAO;
-import com.example.helloworld.views.PersonView;
+import com.alexroussos.saponify.core.Person;
+import com.alexroussos.saponify.db.PersonDAO;
+import com.alexroussos.saponify.views.PersonView;
 import com.google.common.base.Optional;
 import com.sun.jersey.api.NotFoundException;
 import io.dropwizard.hibernate.UnitOfWork;

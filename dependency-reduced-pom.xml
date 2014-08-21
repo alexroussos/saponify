@@ -77,7 +77,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.example.helloworld.HelloWorldApplication</mainClass>
+                  <mainClass>com.alexroussos.saponify.SaponifyApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>
@@ -95,21 +95,6 @@
               </excludes>
             </filter>
           </filters>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>2.7</version>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <skip>true</skip>
-          <skipDeploy>true</skipDeploy>
         </configuration>
       </plugin>
     </plugins>

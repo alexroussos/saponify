@@ -1,4 +1,4 @@
-package com.example.helloworld.core;
+package com.alexroussos.saponify.core;
 
 import javax.persistence.*;
 
@@ -6,19 +6,19 @@ import javax.persistence.*;
 @Table(name = "people")
 @NamedQueries({
     @NamedQuery(
-        name = "com.example.helloworld.core.Person.findAll",
+        name = "com.alexroussos.saponify.core.Person.findAll",
         query = "SELECT p FROM Person p"
     ),
     @NamedQuery(
-        name = "com.example.helloworld.core.Person.findById",
+        name = "com.alexroussos.saponify.core.Person.findById",
         query = "SELECT p FROM Person p WHERE p.id = :id"
     )
 })
 public class Person {
     @Id
-    @SequenceGenerator(name = "personSeq", sequenceName="person_id_seq", allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "personSeq")
-    private long id;
+  //  @SequenceGenerator(name = "uuid")
+    //@GeneratedValue(generator = "uuid")
+    private String id;
 
     @Column(name = "fullName", nullable = false)
     private String fullName;
@@ -26,11 +26,11 @@ public class Person {
     @Column(name = "jobTitle", nullable = false)
     private String jobTitle;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

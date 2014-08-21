@@ -1,6 +1,6 @@
-package com.example.helloworld.views;
+package com.alexroussos.saponify.views;
 
-import com.example.helloworld.core.Person;
+import com.alexroussos.saponify.core.Person;
 
 import io.dropwizard.views.View;
 

@@ -1,6 +1,6 @@
-package com.example.helloworld.resources;
+package com.alexroussos.saponify.resources;
 
-import com.example.helloworld.core.User;
+import com.alexroussos.saponify.core.User;
 import io.dropwizard.auth.Auth;
 
 import javax.ws.rs.GET;

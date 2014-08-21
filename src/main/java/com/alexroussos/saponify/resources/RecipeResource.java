@@ -58,14 +58,6 @@ public class RecipeResource {
     @UnitOfWork
     @Produces(MediaType.TEXT_HTML)
     public RecipeView getRecipeViewFreemarker(@PathParam("recipeId") LongParam recipeId) {
-        return new RecipeView(RecipeView.Template.FREEMARKER, findSafely(recipeId.get()));
-    }
-
-    @GET
-    @Path("/{recipeId}/view_mustache")
-    @UnitOfWork
-    @Produces(MediaType.TEXT_HTML)
-    public RecipeView getRecipeViewMustache(@PathParam("recipeId") LongParam recipeId) {
-        return new RecipeView(RecipeView.Template.MUSTACHE, findSafely(recipeId.get()));
+        return new RecipeView(findSafely(recipeId.get()));
     }
 }

@@ -1,6 +1,13 @@
 package com.alexroussos.saponify.core;
 
+import org.hibernate.annotations.Columns;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "recipe")
@@ -23,6 +30,9 @@ public class Recipe {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @OneToMany(mappedBy = "recipeId", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
+    private List<IngredientAmount> ingredientAmount = new ArrayList<>();
+
     public long getId() {
         return id;
     }
@@ -38,4 +48,13 @@ public class Recipe {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Recipe addIngredientAmount(IngredientAmount ingredientAmount) {
+        this.ingredientAmount.add(ingredientAmount);
+        return this;
+    }
+
+    public List<IngredientAmount> getIngredientAmount() {return ingredientAmount;}
+
+    public void setIngredientAmount(List<IngredientAmount> ingredientAmount) {this.ingredientAmount = ingredientAmount;}
 }

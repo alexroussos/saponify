@@ -1,5 +1,6 @@
 package com.alexroussos.saponify.db;
 
+import com.alexroussos.saponify.core.IngredientAmount;
 import com.alexroussos.saponify.core.Recipe;
 import com.google.common.base.Optional;
 import io.dropwizard.hibernate.AbstractDAO;
@@ -18,6 +19,18 @@ public class RecipeDao extends AbstractDAO<Recipe> {
 
     public Recipe create(Recipe recipe) {
         return persist(recipe);
+    }
+
+    public Recipe addIngredient(long recipeId, IngredientAmount ingredientAmount) {
+        Optional<Recipe> recipeOptional = findById(recipeId);
+        if (recipeOptional.isPresent()) {
+            Recipe recipe = recipeOptional.get();
+            recipe.addIngredientAmount(ingredientAmount);
+            return persist(recipe);
+        } else {
+            // TODO error here
+            return null;
+        }
     }
 
     public List<Recipe> findAll() {

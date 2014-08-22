@@ -30,4 +30,27 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="9" author="alexr">
+        <comment>add ingredient amount</comment>
+        <createSequence sequenceName="ingredient_amount_id_seq" />
+        <createTable tableName="ingredient_amount">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="recipe_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ingredient_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount_grams" type="real">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="ingredient_amount" baseColumnNames="recipe_id"
+                                 constraintName="recipe_id_fk" referencedTableName="recipe"
+                                 referencedColumnNames="id" onDelete="CASCADE"/>
+    </changeSet>
+
 </databaseChangeLog>

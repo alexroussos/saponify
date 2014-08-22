@@ -2,8 +2,10 @@ package com.alexroussos.saponify;
 
 import com.alexroussos.saponify.cli.RenderCommand;
 import com.alexroussos.saponify.core.Ingredient;
+import com.alexroussos.saponify.core.IngredientAmount;
 import com.alexroussos.saponify.core.Recipe;
 import com.alexroussos.saponify.core.Template;
+import com.alexroussos.saponify.db.IngredientAmountDao;
 import com.alexroussos.saponify.db.IngredientDao;
 import com.alexroussos.saponify.db.RecipeDao;
 import com.alexroussos.saponify.health.TemplateHealthCheck;
@@ -27,20 +29,13 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
     }
 
     private final HibernateBundle<SaponifyConfiguration> recipeBundle =
-            new HibernateBundle<SaponifyConfiguration>(Recipe.class) {
+            new HibernateBundle<SaponifyConfiguration>(Recipe.class, IngredientAmount.class, Ingredient.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(SaponifyConfiguration configuration) {
                     return configuration.getDataSourceFactory();
                 }
             };
 
-    private final HibernateBundle<SaponifyConfiguration> ingredientBundle =
-            new HibernateBundle<SaponifyConfiguration>(Ingredient.class) {
-                @Override
-                public DataSourceFactory getDataSourceFactory(SaponifyConfiguration configuration) {
-                    return configuration.getDataSourceFactory();
-                }
-            };
 
     @Override
     public String getName() {
@@ -59,7 +54,6 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
             }
         });
         bootstrap.addBundle(recipeBundle);
-        bootstrap.addBundle(ingredientBundle);
         bootstrap.addBundle(new ViewBundle());
     }
 
@@ -68,7 +62,8 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
                     Environment environment) throws ClassNotFoundException {
         LOGGER.info("Starting the HelloWorld App");
         final RecipeDao recipeDao = new RecipeDao(recipeBundle.getSessionFactory());
-        final IngredientDao ingredientDao = new IngredientDao(ingredientBundle.getSessionFactory());
+        final IngredientDao ingredientDao = new IngredientDao(recipeBundle.getSessionFactory());
+        final IngredientAmountDao ingredientAmountDao = new IngredientAmountDao(recipeBundle.getSessionFactory());
         final Template template = configuration.buildTemplate();
 
         environment.healthChecks().register("template", new TemplateHealthCheck(template));
@@ -76,5 +71,6 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
         environment.jersey().register(new ProtectedResource());
         environment.jersey().register(new RecipeResource(recipeDao));
         environment.jersey().register(new IngredientResource(ingredientDao));
+        environment.jersey().register(new IngredientAmountResource(ingredientAmountDao));
     }
 }

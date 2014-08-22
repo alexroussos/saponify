@@ -1,5 +1,6 @@
 package com.alexroussos.saponify.resources;
 
+import com.alexroussos.saponify.core.IngredientAmount;
 import com.alexroussos.saponify.core.Recipe;
 import com.alexroussos.saponify.db.RecipeDao;
 import com.alexroussos.saponify.views.RecipeView;
@@ -44,6 +45,13 @@ public class RecipeResource {
     @UnitOfWork
     public Recipe createRecipe(Recipe recipe) {
         return recipeDao.create(recipe);
+    }
+
+    @POST
+    @Path("/{recipeId}/addIngredient")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addIngredient(@PathParam("recipeId") LongParam recipeId, IngredientAmount ingredientAmount) {
+        recipeDao.addIngredient(recipeId.get(), ingredientAmount);
     }
 
     @GET

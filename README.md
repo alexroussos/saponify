@@ -39,3 +39,6 @@ Run db migration:
 Drop all:
 
     java $JAVA_OPTS -jar target/saponify-0.1.0-SNAPSHOT.jar db drop-all --confirm-delete-everything saponify.yml
+    
+IntelliJ run config:
+![Config to run in IntelliJ](https://www.evernote.com/shard/s23/sh/57099c2c-deda-4684-ab91-952d2601dc11/bb866fd4e77f9d5d81ee5b7c5079925e/res/f46a76bc-87e6-4cf2-8f50-71781c9719dc/skitch.png)

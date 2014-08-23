@@ -20,6 +20,7 @@ import io.dropwizard.views.ViewBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+// TODO guice
 public class SaponifyApplication extends Application<SaponifyConfiguration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SaponifyConfiguration.class);
 
@@ -69,5 +70,8 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
         environment.jersey().register(new ProtectedResource());
         environment.jersey().register(new RecipeResource(recipeDao));
         environment.jersey().register(new IngredientResource(ingredientDao));
+
+        // TODO don't enable until can put behind /admin and secure it
+        // environment.servlets().addServlet("metrics-servlet", new MetricsServlet(environment.metrics())).addMapping("/metrics");
     }
 }

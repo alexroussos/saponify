@@ -1,5 +1,6 @@
 package com.alexroussos.saponify.core;
 
+import lombok.Data;
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -21,6 +22,7 @@ import java.util.List;
         query = "SELECT r FROM Recipe r WHERE r.id = :id"
     )
 })
+@Data
 public class Recipe {
     @Id
     @SequenceGenerator(name = "recipeSeq", sequenceName="recipe_id_seq", allocationSize=1)
@@ -33,28 +35,8 @@ public class Recipe {
     @OneToMany(mappedBy = "recipeId", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<IngredientAmount> ingredientAmount = new ArrayList<>();
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Recipe addIngredientAmount(IngredientAmount ingredientAmount) {
         this.ingredientAmount.add(ingredientAmount);
         return this;
     }
-
-    public List<IngredientAmount> getIngredientAmount() {return ingredientAmount;}
-
-    public void setIngredientAmount(List<IngredientAmount> ingredientAmount) {this.ingredientAmount = ingredientAmount;}
 }

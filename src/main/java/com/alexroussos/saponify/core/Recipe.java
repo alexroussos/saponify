@@ -32,6 +32,7 @@ public class Recipe {
     @Column(name = "name", nullable = false)
     private String name;
 
+    // TODO make unique
     @OneToMany(mappedBy = "recipeId", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<IngredientAmount> ingredientAmount = new ArrayList<>();
 

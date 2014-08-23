@@ -1,0 +1,40 @@
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  margin-left: 50px;
+  /* don't get overlayed by top/bottom navbar */
+  padding-top: 70px;
+  padding-bottom: 70px; 
+}
+
+.control-group {
+  padding-top: 10px;
+}
+
+.footer {
+  width: 90%;
+  margin: 0 auto;
+  margin-left: 50px;
+  /* don't get overlayed by top/bottom navbar */
+  padding-top: 70px;
+  padding-bottom: 70px; 
+}
+
+.footer > a {
+  padding-left: 10px;
+}
+
+.icon-info-sign {
+  color:#6685E0;
+}
+
+.icon-info-sign:hover {
+  color:#859DE6;
+  text-decoration: none;
+}
+
+#recipe {
+  min-width: 300px;
+  max-width: 500px;
+}

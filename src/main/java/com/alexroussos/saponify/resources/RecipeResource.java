@@ -66,7 +66,7 @@ public class RecipeResource {
     }
 
     @GET
-    @Path("/{recipeId}/view_freemarker")
+    @Path("/{recipeId}/view")
     @UnitOfWork
     @Produces(MediaType.TEXT_HTML)
     public RecipeView getRecipeViewFreemarker(@PathParam("recipeId") LongParam recipeId) {

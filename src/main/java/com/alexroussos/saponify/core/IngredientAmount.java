@@ -17,6 +17,7 @@ public class IngredientAmount {
     @Column(name = "recipe_id")
     private long recipeId;
 
+    // TODO inflate this on retrieval / map to Ingredient
     @Column(name = "ingredient_id", nullable = false)
     private long ingredientId;
 

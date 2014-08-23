@@ -21,18 +21,6 @@ public class RecipeDao extends AbstractDAO<Recipe> {
         return persist(recipe);
     }
 
-    public Recipe addIngredient(long recipeId, IngredientAmount ingredientAmount) {
-        Optional<Recipe> recipeOptional = findById(recipeId);
-        if (recipeOptional.isPresent()) {
-            Recipe recipe = recipeOptional.get();
-            recipe.addIngredientAmount(ingredientAmount);
-            return persist(recipe);
-        } else {
-            // TODO error here
-            return null;
-        }
-    }
-
     public List<Recipe> findAll() {
         return list(namedQuery("com.alexroussos.saponify.core.Recipe.findAll"));
     }

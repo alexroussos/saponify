@@ -49,9 +49,13 @@ public class RecipeResource {
 
     @POST
     @Path("/{recipeId}/addIngredient")
+    @Timed(name = "add-ingredient")
+    @UnitOfWork
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addIngredient(@PathParam("recipeId") LongParam recipeId, IngredientAmount ingredientAmount) {
-        recipeDao.addIngredient(recipeId.get(), ingredientAmount);
+    public Recipe addIngredient(@PathParam("recipeId") LongParam recipeId, IngredientAmount ingredientAmount) {
+        Recipe recipe = findSafely(recipeId.get());
+        recipe.addIngredientAmount(ingredientAmount);
+        return recipe;
     }
 
     @GET

@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="" type="com.example.views.RecipeView" -->
+<#-- @ftlvariable name="" type="com.example.views.AllRecipesView" -->
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -15,15 +15,20 @@
         <script src="../../assets/js/recipe.js"></script>
     </head>
     <body>
-        <!-- calls getRecipe().getName() and sanitizes it -->
-        <h1>Recipe Name: ${recipe.name?html}</h1>
+        <h1>Recipes</h1>
         <ul>
-        <#list recipe.ingredientAmount as ingredient>
-            <li>Ingredient ${ingredient.ingredientId?html}: ${ingredient.amountGrams?html} g</li>
+        <#list allRecipes as recipe>
+            <li><a href="../${recipe.id}/view">${recipe.name}</a></li>
         </#list>
         <ul>
 
-        <h1>Add Ingredient</h1>
-        
+        <h2>Create Recipe</h2>
+        <form id="createRecipe" action="/recipe">
+            Recipe name:
+            <input type="text" name="RecipeName" value="My Soap..."><br>
+            <input type="submit" value="Create">
+        </form>
+
+        <div id="result" />
     </body>
 </html>

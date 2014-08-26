@@ -24,6 +24,7 @@ import java.util.List;
 })
 @Data
 public class Recipe {
+
     @Id
     @SequenceGenerator(name = "recipeSeq", sequenceName="recipe_id_seq", allocationSize=1)
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "recipeSeq")
@@ -39,5 +40,30 @@ public class Recipe {
     public Recipe addIngredientAmount(IngredientAmount ingredientAmount) {
         this.ingredientAmount.add(ingredientAmount);
         return this;
+    }
+
+    // Freemarker can't see the lombok getter/setter :(
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setIngredientAmount(List<IngredientAmount> ingredientAmount) {
+        this.ingredientAmount = ingredientAmount;
+    }
+
+    public List<IngredientAmount> getIngredientAmount() {
+        return ingredientAmount;
     }
 }

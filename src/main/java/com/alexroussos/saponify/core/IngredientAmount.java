@@ -23,4 +23,37 @@ public class IngredientAmount {
 
     @Column(name = "amount_grams", nullable = false)
     private Float amountGrams;
+
+    // freemarker doesn't recognize lombok-generated setters/getters
+    public long getId() {
+        return id;
+    }
+
+    public long getRecipeId() {
+        return recipeId;
+    }
+
+    public long getIngredientId() {
+        return ingredientId;
+    }
+
+    public Float getAmountGrams() {
+        return amountGrams;
+    }
+
+    public void setRecipeId(long recipeId) {
+        this.recipeId = recipeId;
+    }
+
+    public void setIngredientId(long ingredientId) {
+        this.ingredientId = ingredientId;
+    }
+
+    public void setAmountGrams(Float amountGrams) {
+        this.amountGrams = amountGrams;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

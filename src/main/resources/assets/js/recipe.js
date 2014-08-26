@@ -1,31 +1,30 @@
 $(document).ready(function () {
- // TODO get url for current recipe
-    $.getJSON("/recipe/1", listIngredients);
+    $("#createRecipe").submit(function( event ) {
 
-	$(".tooltip-info").popover();
+      // Stop form from submitting normally
+      event.preventDefault();
 
-	$(".tooltip-info").bind({
-		mouseenter : showTooltip,
-		mouseleave: hideTooltip
-	});
-});
+      // Get some values from elements on the page:
+      var $form = $( this ),
+        recipeName = $form.find( "input[name='RecipeName']" ).val(),
+        url = $form.attr( "action" );
 
-var listIngredients = function(data) {
-    var items = [];
-    $(data.ingredientAmount).each(function() {
-        items.push( "<li>Ingredient " + this.ingredientId + ": " + this.amountGrams + " g</li>" );
+      // Send the data using post
+      // var request = $.post( url, { name: recipeName } );
+      var postData = JSON.stringify({ name: recipeName });
+      var request = $.ajax({url:url, type:"POST", data:postData,
+              contentType:"application/json; charset=utf-8",
+              dataType:"json"
+            })
+
+      // Put the results in a div
+      request.done(function( data ) {
+        $( "#result" ).empty().append( "<section>Created " + data.name + "</section>" );
+      });
+      request.fail(function( jqXHR, textStatus ) {
+        $( "#result" ).empty().append( "<section>Failed: " + jqXHR.responseJSON.message + "</section>" );
+      });
     });
 
-    $( "<ul/>", {
-    "class": "my-new-list",
-    html: items.join( "" )
-    }).appendTo( "body" );
-}
+});
 
-var showTooltip = function(e){
-	$(e.target).popover('show');
-}
-
-var hideTooltip = function(e){
-	$(e.target).popover('hide');
-}

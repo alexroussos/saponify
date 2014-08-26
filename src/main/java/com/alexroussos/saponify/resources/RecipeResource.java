@@ -3,6 +3,7 @@ package com.alexroussos.saponify.resources;
 import com.alexroussos.saponify.core.IngredientAmount;
 import com.alexroussos.saponify.core.Recipe;
 import com.alexroussos.saponify.db.RecipeDao;
+import com.alexroussos.saponify.views.AllRecipesView;
 import com.alexroussos.saponify.views.RecipeView;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
@@ -69,7 +70,15 @@ public class RecipeResource {
     @Path("/{recipeId}/view")
     @UnitOfWork
     @Produces(MediaType.TEXT_HTML)
-    public RecipeView getRecipeViewFreemarker(@PathParam("recipeId") LongParam recipeId) {
+    public RecipeView getRecipeView(@PathParam("recipeId") LongParam recipeId) {
         return new RecipeView(findSafely(recipeId.get()));
+    }
+
+    @GET
+    @Path("/all/view")
+    @UnitOfWork
+    @Produces(MediaType.TEXT_HTML)
+    public AllRecipesView getAllRecipesView() {
+        return new AllRecipesView(recipeDao.findAll());
     }
 }

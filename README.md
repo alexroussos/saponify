@@ -1,6 +1,6 @@
 # Introduction
 
-Saponify is a soap recipe calculator. It is still a work in progress.
+Saponify is a soap recipe calculator. **It is still a work in progress in the earliest stages of development.** You can view the latest on Heroku: http://saponify.herokuapp.com/recipe/all/view
 
 Some random commands to help me remember things:
   

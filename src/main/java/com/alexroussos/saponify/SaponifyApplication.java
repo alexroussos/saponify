@@ -66,9 +66,8 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
         final Template template = configuration.buildTemplate();
 
         environment.healthChecks().register("template", new TemplateHealthCheck(template));
-        environment.jersey().register(new ViewResource());
         environment.jersey().register(new ProtectedResource());
-        environment.jersey().register(new RecipeResource(recipeDao));
+        environment.jersey().register(new RecipeResource(recipeDao, ingredientDao));
         environment.jersey().register(new IngredientResource(ingredientDao));
 
         // TODO don't enable until can put behind /admin and secure it

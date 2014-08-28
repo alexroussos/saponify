@@ -14,6 +14,8 @@
         <script src="../../assets/js/bootstrap.min.js"></script>
         <script src="../../assets/js/recipe.js"></script>
     </head>
+
+    <#include "nav.ftl">
     <body>
         <!-- calls getRecipe().getName() and sanitizes it -->
         <h1>Recipe Name: ${recipe.name?html}</h1>
@@ -23,7 +25,6 @@
         </#list>
         <ul>
 
-        <h1>Add Ingredient</h1>
-
+        <#include "ingredient-picker.ftl">
     </body>
 </html>

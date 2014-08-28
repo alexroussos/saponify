@@ -2,6 +2,7 @@ package com.alexroussos.saponify.resources;
 
 import com.alexroussos.saponify.core.IngredientAmount;
 import com.alexroussos.saponify.core.Recipe;
+import com.alexroussos.saponify.db.IngredientDao;
 import com.alexroussos.saponify.db.RecipeDao;
 import com.alexroussos.saponify.views.AllRecipesView;
 import com.alexroussos.saponify.views.RecipeView;
@@ -21,8 +22,11 @@ public class RecipeResource {
 
     private final RecipeDao recipeDao;
 
-    public RecipeResource(RecipeDao recipeDao) {
+    private final IngredientDao ingredientDao;
+
+    public RecipeResource(RecipeDao recipeDao, IngredientDao ingredientDao) {
         this.recipeDao = recipeDao;
+        this.ingredientDao = ingredientDao;
     }
 
     @GET
@@ -71,7 +75,7 @@ public class RecipeResource {
     @UnitOfWork
     @Produces(MediaType.TEXT_HTML)
     public RecipeView getRecipeView(@PathParam("recipeId") LongParam recipeId) {
-        return new RecipeView(findSafely(recipeId.get()));
+        return new RecipeView(findSafely(recipeId.get()), ingredientDao.findAll());
     }
 
     @GET

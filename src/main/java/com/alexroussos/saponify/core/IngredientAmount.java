@@ -17,9 +17,20 @@ public class IngredientAmount {
     @Column(name = "recipe_id")
     private long recipeId;
 
-    // TODO inflate this on retrieval / map to Ingredient
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+    }
+
     @Column(name = "ingredient_id", nullable = false)
     private long ingredientId;
+
+    @ManyToOne
+    @JoinColumn(name = "ingredient_id", referencedColumnName = "id", updatable = false, insertable = false)
+    private Ingredient ingredient;
 
     @Column(name = "amount_grams", nullable = false)
     private Float amountGrams;
@@ -34,7 +45,11 @@ public class IngredientAmount {
     }
 
     public long getIngredientId() {
-        return ingredientId;
+        return ingredient.getId();
+    }
+
+    public void setIngredientId(long ingredientId) {
+        this.ingredientId = ingredientId;
     }
 
     public Float getAmountGrams() {
@@ -43,10 +58,6 @@ public class IngredientAmount {
 
     public void setRecipeId(long recipeId) {
         this.recipeId = recipeId;
-    }
-
-    public void setIngredientId(long ingredientId) {
-        this.ingredientId = ingredientId;
     }
 
     public void setAmountGrams(Float amountGrams) {

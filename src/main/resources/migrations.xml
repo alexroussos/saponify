@@ -52,5 +52,11 @@
                                  constraintName="recipe_id_fk" referencedTableName="recipe"
                                  referencedColumnNames="id" onDelete="CASCADE"/>
     </changeSet>
+    
+    <changeSet id="10" author="alexr">
+        <addForeignKeyConstraint baseTableName="ingredient_amount" baseColumnNames="ingredient_id"
+                                 constraintName="ingredient_id_fk" referencedTableName="ingredient"
+                                 referencedColumnNames="id" />
+    </changeSet>
 
 </databaseChangeLog>

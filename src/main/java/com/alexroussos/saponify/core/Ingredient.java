@@ -18,6 +18,7 @@ import javax.persistence.*;
 })
 @Data
 public class Ingredient {
+
     @Id
     @SequenceGenerator(name = "ingredientSeq", sequenceName="ingredient_id_seq", allocationSize=1)
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "ingredientSeq")
@@ -28,4 +29,28 @@ public class Ingredient {
 
     @Column(name = "sapNaoh", nullable = false)
     private Float sapNaoh;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Float getSapNaoh() {
+        return sapNaoh;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSapNaoh(Float sapNaoh) {
+        this.sapNaoh = sapNaoh;
+    }
 }

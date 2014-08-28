@@ -19,11 +19,11 @@
         <h1>Recipe Name: ${recipe.name?html}</h1>
         <ul>
         <#list recipe.ingredientAmount as ingredient>
-            <li>Ingredient ${ingredient.ingredientId?html}: ${ingredient.amountGrams?html} g</li>
+            <li>Ingredient ${ingredient.ingredient.name?html}: ${ingredient.amountGrams?html} g</li>
         </#list>
         <ul>
 
         <h1>Add Ingredient</h1>
-        
+
     </body>
 </html>

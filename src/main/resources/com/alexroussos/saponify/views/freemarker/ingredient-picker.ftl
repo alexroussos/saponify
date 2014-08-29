@@ -3,7 +3,8 @@
 
         <ul>
             <#list ingredients as ingredient>
-                <li>${ingredient.name?html} [${ingredient.sapNaoh}]</li>
+                <li onclick="addIngredient(this)" data-ingredient-id="${ingredient.id}">${ingredient.name?html} [${ingredient.sapNaoh}]</li>
             </#list>
         </ul>
+        <div id="ingredient-picker-message" />
     </div>

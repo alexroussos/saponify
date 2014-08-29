@@ -5,7 +5,7 @@
         <meta name="description" content="Calculates soap recipes and predicts properties based on types of fats and oils.">
         <meta name="keywords" content="soap, recipe, calculator, fat, oil, lye, saponification">
         <meta name="author" content="Alex Roussos">
-        <title>Saponify</title>
+        <title>${recipe.name?html} - Saponify</title>
         <link href="../../assets/css/bootstrap.min.css" type="text/css" rel="stylesheet" >
         <link href="../../assets/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" >
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -16,7 +16,7 @@
     </head>
 
     <#include "nav.ftl">
-    <body>
+    <body data-recipe-id="${recipe.id}">
         <!-- calls getRecipe().getName() and sanitizes it -->
         <h1>Recipe Name: ${recipe.name?html}</h1>
         <ul>

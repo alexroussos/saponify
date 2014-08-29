@@ -10,12 +10,11 @@ $(document).ready(function () {
         url = $form.attr( "action" );
 
       // Send the data using post
-      // var request = $.post( url, { name: recipeName } );
       var postData = JSON.stringify({ name: recipeName });
       var request = $.ajax({url:url, type:"POST", data:postData,
               contentType:"application/json; charset=utf-8",
               dataType:"json"
-            })
+            });
 
       // Put the results in a div
       request.done(function( data ) {
@@ -25,6 +24,24 @@ $(document).ready(function () {
         $( "#result" ).empty().append( "<section>Failed: " + jqXHR.responseJSON.message + "</section>" );
       });
     });
-
 });
 
+var addIngredient = function(ingredient) {
+    event.preventDefault();
+    var ingredientId = ingredient.getAttribute("data-ingredient-id");
+    var recipeId = $("body").data("recipe-id");
+    var json = {"recipeId":recipeId, "ingredientId":ingredientId, "amountGrams": 17};
+    var postData = JSON.stringify(json);
+    var url = "/recipe/" + recipeId + "/addIngredient";
+    var request = $.ajax({url:url, type:"POST", data:postData,
+          contentType:"application/json; charset=utf-8",
+          dataType:"json"
+    });
+
+    request.done(function( data ) {
+        // TODO refresh the recipe -- 'data' is the recipe
+    });
+    request.fail(function( jqXHR, textStatus ) {
+        $( "#ingredient-picker-message" ).empty().append( "<section>Failed: " + jqXHR.responseJSON.message + "</section>" );
+    });
+}

@@ -69,6 +69,7 @@ public class SaponifyApplication extends Application<SaponifyConfiguration> {
         environment.jersey().register(new ProtectedResource());
         environment.jersey().register(new RecipeResource(recipeDao, ingredientDao));
         environment.jersey().register(new IngredientResource(ingredientDao));
+        environment.jersey().register(new TestResource(recipeDao, ingredientDao));
 
         // TODO don't enable until can put behind /admin and secure it
         // environment.servlets().addServlet("metrics-servlet", new MetricsServlet(environment.metrics())).addMapping("/metrics");
